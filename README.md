@@ -1,8 +1,22 @@
 # Claude Operating Guide — 연구·문서 편집 운영 세트
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![works with: Claude Code & Claude.ai](https://img.shields.io/badge/works%20with-Claude%20Code%20%26%20Claude.ai-6C3EF5)
+![type: operating guide](https://img.shields.io/badge/type-operating%20guide-informational)
+
 _A portable operating guide + lean Claude Code adapter that biases Claude toward rigorous research and clean document/deck production._
 
 학술·정책·실무 문서를 자주 다루는 사람을 위해, Claude가 **보고서·해설서·슬라이드 덱을 만들고, 정보를 추출·검증하고, 자료를 조사하는** 방식을 더 엄밀하게 잡아주는 규칙 세트입니다. 특정 개인의 작업 기록에서 **방법론만 추출·익명화**했습니다.
+
+## 목차
+
+- [무엇이 들어 있나](#무엇이-들어-있나)
+- [어떻게 쓰나 — 두 가지 경로](#어떻게-쓰나--두-가지-경로)
+- [핵심 규칙 미리보기](#핵심-규칙-미리보기-전문은-코어)
+- [도메인 레이어는 직접](#도메인-레이어는-직접)
+- [관련 프로젝트](#관련-프로젝트)
+- [Advanced: 여러 머신에 싱크하기](#advanced-선택-여러-머신에-싱크하기)
+- [라이선스](#라이선스)
 
 ## 무엇이 들어 있나
 

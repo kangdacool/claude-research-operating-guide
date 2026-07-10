@@ -39,6 +39,41 @@ NOTES.md                         ← 출처·범위(무엇을 뺐는지)
 
 - 한글 `.hwpx` 안전 편집: **[`kangdacool/hwpx-editing-skill`](https://github.com/kangdacool/hwpx-editing-skill)** (MIT). 이 세트의 hwpx 스텁은 그 저장소를 정본으로 가리킵니다.
 
+## Advanced (선택): 여러 머신에 싱크하기
+
+데스크톱·노트북 등 여러 대에서 **같은 Claude Code 설정**을 쓰려면, 클라우드 동기화 폴더(OneDrive·Dropbox·iCloud 등)에 **정본 하나**를 두고 각 머신은 **얇은 링크만** 건다. 심링크 대신 `@import`를 쓰므로 **Windows에서 관리자 권한/Dev Mode가 필요 없다.**
+
+아래 `<CLOUD>` 는 클라우드 폴더의 **절대경로**로 바꿔라(예: `D:\cloud\claude-config`).
+
+**1) 정본을 클라우드에 둔다** — `<CLOUD>\claude-config\` 안에 `CLAUDE.md`, `skills\`, `agents\` 배치.
+
+**2) 각 머신에서 한 번씩 링크** (기존 `~/.claude`의 해당 항목은 먼저 백업 후 삭제)
+
+Windows (PowerShell, 관리자 불필요):
+```powershell
+$claude = "$env:USERPROFILE\.claude"
+$cfg    = "<CLOUD>\claude-config"
+New-Item -ItemType Junction -Path "$claude\skills" -Target "$cfg\skills"
+New-Item -ItemType Junction -Path "$claude\agents" -Target "$cfg\agents"
+Set-Content "$claude\CLAUDE.md" "@<CLOUD>/claude-config/CLAUDE.md" -Encoding utf8
+```
+macOS / Linux:
+```bash
+claude="$HOME/.claude"; cfg="<CLOUD>/claude-config"
+ln -s "$cfg/skills" "$claude/skills"
+ln -s "$cfg/agents" "$claude/agents"
+printf '@%s/CLAUDE.md\n' "$cfg" > "$claude/CLAUDE.md"
+```
+
+**3) 절대 싱크하지 말 것 (머신 로컬 유지)**
+- `~/.claude/.credentials.json` — **인증 토큰**. 클라우드에 올리면 계정이 노출된다.
+- `history.jsonl`, `projects/`, `sessions/`, 각종 cache — 머신별 상태(충돌·비대 유발).
+
+**규율**
+- durable 규칙은 **정본(`<CLOUD>\claude-config\CLAUDE.md`)에서만** 편집한다. 각 머신의 `~/.claude/CLAUDE.md`는 `@import` 1줄 스텁이니 건드리지 않는다.
+- `@import`는 **절대경로**를 써라. `@~/...` 틸드 확장은 불안정하다.
+- 머신 전환 전 **클라우드 동기화 완료**를 확인한다. 새 세션에서 `/memory`로 로딩 확인.
+
 ## 라이선스
 
-권장: MIT 또는 CC-BY-4.0. `LICENSE` 파일을 추가하고 저작권자/연도를 채워 넣으세요. (규칙은 기본값일 뿐이니 각자 맥락에 맞게 덮어써서 쓰라는 취지의 세트입니다.)
+MIT — [`LICENSE`](LICENSE) 참조. 규칙은 기본값일 뿐이니 각자 맥락에 맞게 덮어써서 쓰라는 취지의 세트입니다.

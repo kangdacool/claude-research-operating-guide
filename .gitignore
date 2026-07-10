@@ -1,0 +1,15 @@
+# OS / cloud-sync cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local scratch
+*.tmp
+/tmp/
